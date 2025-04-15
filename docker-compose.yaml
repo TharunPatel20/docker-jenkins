@@ -1,0 +1,19 @@
+# save the file as docker-compose.yaml
+# Run docker compose up -d to pull the image and start the container
+# You can access the jenkins web console form http://localhost:8081
+version: '3.8'
+
+services:
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: jenkins
+    ports:
+      - "8081:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+
+volumes:
+  jenkins_home:
